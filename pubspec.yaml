@@ -1,11 +1,3 @@
-name: tyre_rescue_qld
-description: Tyre Rescue QLD mobile app (Flutter)
-publish_to: "none"
-version: 1.0.0+1
-
-environment:
-  sdk: ">=3.0.0 <4.0.0"
-
 dependencies:
   flutter:
     sdk: flutter
@@ -21,18 +13,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  # We'll add assets later from your phone gallery:
-  # assets:
-  #   - aflutter:
-  uses-material-design: true
-  assets:
-   
-    flutter:
-  uses-material-design: true
   assets:
     - assets/logo.png
-  #   - assets/hero.jpg
-  #   - assets/services/tyre.jpg
-  #   - assets/services/fuel.jpg
-  #   - assets/services/jump.jpg
-  #   - assets/services/battery.jpg
+    # - assets/services/fuel.jpg
+    # - assets/services/jump.jpg
+    # - assets/services/battery.jpg
