@@ -23,7 +23,14 @@ flutter:
   uses-material-design: true
   # We'll add assets later from your phone gallery:
   # assets:
-  #   - assets/logo.png
+  #   - aflutter:
+  uses-material-design: true
+  assets:
+   
+    flutter:
+  uses-material-design: true
+  assets:
+    - assets/logo.png
   #   - assets/hero.jpg
   #   - assets/services/tyre.jpg
   #   - assets/services/fuel.jpg
