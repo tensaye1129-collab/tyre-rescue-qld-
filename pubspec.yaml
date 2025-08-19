@@ -1,0 +1,31 @@
+name: tyre_rescue_qld
+description: Tyre Rescue QLD mobile app (Flutter)
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_maps_flutter: ^2.7.0
+  shared_preferences: ^2.2.3
+  in_app_review: ^2.0.8
+  url_launcher: ^6.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  # We'll add assets later from your phone gallery:
+  # assets:
+  #   - assets/logo.png
+  #   - assets/hero.jpg
+  #   - assets/services/tyre.jpg
+  #   - assets/services/fuel.jpg
+  #   - assets/services/jump.jpg
+  #   - assets/services/battery.jpg
