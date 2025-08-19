@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// Contact details for call & email buttons
-const String phoneNumber = '0466846785';
-const String emailAddress = 'tensaye1129@gmail.com';
+// === Your business details ===
+const String businessName = 'Tyre Rescue QLD';
+const String phoneNumber = '0466846785'; // change if needed
+const String emailAddress = 'tensaye1129collab@gmail.com'; // change if needed
 
 void main() => runApp(const TyreRescueApp());
 
@@ -13,7 +14,7 @@ class TyreRescueApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tyre Rescue QLD',
+      title: businessName,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
@@ -27,54 +28,92 @@ class TyreRescueApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  // Open phone dialer
-  Future<void> _callNumber() async {
-    final Uri callUri = Uri(scheme: 'tel', path: phoneNumber);
-    if (await canLaunchUrl(callUri)) {
-      await launchUrl(callUri);
-    }
+  // --- actions ---
+  Future<void> _call() async {
+    final uri = Uri(scheme: 'tel', path: phoneNumber);
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 
-  // Open email app
-  Future<void> _sendEmail() async {
-    final Uri emailUri = Uri(
+  Future<void> _email() async {
+    final uri = Uri(
       scheme: 'mailto',
       path: emailAddress,
-      query: 'subject=Tyre Rescue QLD Support',
+      queryParameters: {'subject': '$businessName enquiry'},
     );
-    if (await canLaunchUrl(emailUri)) {
-      await launchUrl(emailUri);
-    }
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
+  }
+
+  Future<void> _openMaps() async {
+    // This opens Google Maps to search for your business name
+    final query = Uri.encodeComponent(businessName);
+    final uri = Uri.parse('https://www.google.com/maps/search/?api=1&query=$query');
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tyre Rescue QLD'),
-        backgroundColor: Colors.red,
-      ),
+      appBar: AppBar(title: const Text(businessName)),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Welcome to Tyre Rescue QLD!',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton.icon(
-              onPressed: _callNumber,
-              icon: const Icon(Icons.phone),
-              label: const Text('Call Us'),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton.icon(
-              onPressed: _sendEmail,
-              icon: const Icon(Icons.email),
-              label: const Text('Email Us'),
-            ),
-          ],
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // --- LOGO ---
+              // Make sure pubspec.yaml has:
+              // flutter:
+              //   uses-material-design: true
+              //   assets:
+              //     - assets/logo.png
+              Image.asset(
+                'assets/logo.png',
+                height: 140,
+                fit: BoxFit.contain,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Fast roadside tyre help across QLD',
+                style: Theme.of(context).textTheme.titleMedium,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 24),
+
+              // --- BUTTONS ---
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.call),
+                  label: const Text('Call now'),
+                  onPressed: _call,
+                ),
+              ),
+              const SizedBox(height: 12),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.email),
+                  label: const Text('Email us'),
+                  onPressed: _email,
+                ),
+              ),
+              const SizedBox(height: 12),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.map),
+                  label: const Text('Open in Google Maps'),
+                  onPressed: _openMaps,
+                ),
+              ),
+
+              const SizedBox(height: 24),
+              Text(
+                '© ${DateTime.now().year} $businessName',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
         ),
       ),
     );
